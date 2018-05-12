@@ -37,19 +37,14 @@ public class AI_Pathing : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		// If there are no path nodes assigned at the start of the game then try to find some.
-		if (PathNodes.Count == 0)
+		// If there are path nodes to follow, then find them and sort them by Index.
+		if (PathNodes.Count <= 0)
 		{
-			// Finds all of the path nodes 
-			PathNodes = FindObjectsOfType<AI_PathNodes>().ToList();
+			PathNodes = FindObjectsOfType<AI_PathNodes>().OrderBy(p => p.Index).ToList();
 		}
 
-		// If there are path nodes to follow
-		if(PathNodes.Count > 0)
-		{
-			// Assign first Node
-			TargetNode = PathNodes[NodeIndex];
-		}
+		// Assign first Node
+		TargetNode = PathNodes[NodeIndex];
 	}
 	
 	// Update is called once per frame

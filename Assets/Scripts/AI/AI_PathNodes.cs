@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AI_PathNodes : MonoBehaviour {
 
+	public int Index = 0;
+
 	// Use this for initialization
 	void Start () {
 		
