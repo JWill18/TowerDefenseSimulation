@@ -7,7 +7,7 @@ public class AI_Pathing : MonoBehaviour {
 	/// <summary>
 	///  Margin of Error for Distance from Node
 	/// </summary>
-	private const float TargetDistanceMOE = 5f;
+	public float TargetDistanceMOE = 5f;
 
 	/// <summary>
 	/// Speed for moving self.
