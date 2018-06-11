@@ -27,4 +27,3 @@ build-StandaloneWindows64:
   variables:
    BUILD_TARGET: StandaloneWindows64
   when: manual
-  allow_failure: false
