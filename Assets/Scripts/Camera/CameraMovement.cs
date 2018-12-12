@@ -1,27 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
 
-	public float MovementSpeed;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+	public float MovementSpeed = 25.0f;
 	
 	// Update is called once per frame
 	void Update () {
 		
 		if(Input.GetAxis("Vertical") != 0)
 		{
-			transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * MovementSpeed * Time.deltaTime);
+			transform.Translate(transform.up * Input.GetAxis("Vertical") * MovementSpeed * Time.deltaTime);
 		}
 
 		if(Input.GetAxis("Horizontal") != 0)
 		{
-			transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime);
+			transform.Translate(transform.right * Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime);
 		}
 	}
 }
