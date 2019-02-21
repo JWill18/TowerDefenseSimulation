@@ -86,7 +86,7 @@ public class AI_Pathing : MonoBehaviour {
 	private void MoveToTargetNode()
 	{
 		// Grab the relative position between self and the target node.
-		Vector3 relativePos = TargetNode.transform.position - transform.position;
+		var relativePos = TargetNode.transform.position - transform.position;
 
 		// Lerp the rotation to look at the target node
 		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(relativePos), Time.deltaTime * RotationSpeed);
