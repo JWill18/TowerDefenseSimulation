@@ -14,6 +14,16 @@ public class Turret_Sensor : MonoBehaviour {
 	public GameObject MissilePrefab;
 
 	/// <summary>
+	/// The object that will be rotated to aim the turret.
+	/// </summary>
+	public GameObject TurretHead;
+
+	/// <summary>
+	/// The location that will be used to spawn the projectile.
+	/// </summary>
+	public GameObject FiringPosition;
+
+	/// <summary>
 	/// How far to search for targets
 	/// </summary>
 	public float RadiusRange;
@@ -22,6 +32,11 @@ public class Turret_Sensor : MonoBehaviour {
 	/// How long to wait in between shots.
 	/// </summary>
 	public float FiringIntervalsInSeconds = 2.0f;
+
+	/// <summary>
+	/// The speed that the turret rotates
+	/// </summary>
+	public float RotationSpeed = 4.0f;
 
 	/// <summary>
 	/// The target to shoot at.
@@ -37,6 +52,18 @@ public class Turret_Sensor : MonoBehaviour {
 	/// Are we waiting to fire?
 	/// </summary>
 	private bool IsWaiting = false;
+
+	/// <summary>
+	/// Checks to see if the turret head is looking at the target
+	/// </summary>
+	private bool IsAimingAtTarget {
+		get
+		{
+			var targetDistance = (TargetObject.transform.position - TurretHead.transform.position).normalized;
+			var targetAngle = Vector3.Dot(TurretHead.transform.forward, targetDistance);
+			return targetAngle > 0.95f;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -54,7 +81,7 @@ public class Turret_Sensor : MonoBehaviour {
 			StartCoroutine(WaitToFire());
 
 			// If we can go ahead and fire then do so
-			if(CanFire)
+			if(CanFire && IsAimingAtTarget)
 				Fire();
 		}
 	}
@@ -81,8 +108,6 @@ public class Turret_Sensor : MonoBehaviour {
 			// Release target reference
 			TargetObject = null;
 
-			//print("Seeking new Target");
-
 			// Search for new target
 			foreach (Collider hit in hitColliders)
 			{
@@ -92,6 +117,18 @@ public class Turret_Sensor : MonoBehaviour {
 					TargetObject = hit.gameObject;
 				}
 			}
+		}
+		else
+		{
+			// Look at target
+
+			//var relativePos = enemyHealth.transform.position - TurretHead.transform.position;
+			//relativePos.y = 0.0f;
+			//TurretHead.transform.rotation = Quaternion.Slerp(TurretHead.transform.rotation, Quaternion.LookRotation(relativePos), Time.deltaTime * 50);
+
+			// Grab the relative position between self and the target node.
+			var relativePos = enemyHealth.transform.position - TurretHead.transform.position;
+			TurretHead.transform.rotation = Quaternion.Lerp(TurretHead.transform.rotation, Quaternion.LookRotation(relativePos), Time.deltaTime * RotationSpeed);
 		}
 	}
 
@@ -127,7 +164,7 @@ public class Turret_Sensor : MonoBehaviour {
 		CanFire = false;
 
 		// Create Missile prefab and assign the target.
-		var missile = Instantiate(MissilePrefab, transform.position, transform.rotation);
+		var missile = Instantiate(MissilePrefab, FiringPosition.transform.position, FiringPosition.transform.rotation);
 		missile.GetComponent<AI_Projectile>().SetTarget(TargetObject);
 	}
 }
