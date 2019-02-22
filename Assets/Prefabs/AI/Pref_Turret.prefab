@@ -51,6 +51,7 @@ MonoBehaviour:
   FiringPosition: {fileID: 2050590198697494212}
   RadiusRange: 25
   FiringIntervalsInSeconds: 2
+  RotationSpeed: 4
 --- !u!1 &2050590198697494212
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +137,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300014, guid: 31bd683863af698429d987cee999493e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb87cb008d4bc824d8645dd642ae2514, type: 2}
+    - target: {fileID: 2300008, guid: 31bd683863af698429d987cee999493e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e98dafb615587904db00b6c1da5f8daf, type: 2}
+    - target: {fileID: 2300016, guid: 31bd683863af698429d987cee999493e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ae1513e0f50dc448987c0760e59e099, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31bd683863af698429d987cee999493e, type: 3}
 --- !u!1 &4622310525484663467 stripped
